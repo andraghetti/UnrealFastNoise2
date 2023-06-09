@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using System.IO;
 
 public class UnrealFastNoise2 : ModuleRules
 {
@@ -44,5 +45,9 @@ public class UnrealFastNoise2 : ModuleRules
 			{
 			}
 			);
+		CMakeTarget.add(
+			Target, this, "FastNoise", Path.Combine(this.PluginDirectory, "../../Deps/FastNoise2"), 
+			"-D FASTNOISE2_NOISETOOL=OFF -D FASTNOISE2_TESTS=OFF -D BUILD_SHARED_LIBS=ON", true
+		);
 	}
 }
