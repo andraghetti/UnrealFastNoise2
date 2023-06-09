@@ -1,4 +1,5 @@
 #include "FastNoise2/FastNoise2Generators.h"
+
 #include "FastNoise/FastNoise.h"
 #include "FastSIMD/FastSIMD.h"
 
@@ -12,31 +13,38 @@ void UFastNoise2GeneratorBase::PostInitProperties()
 	}
 }
 
-FFloatRange UFastNoise2GeneratorBase::GenUniformGrid2D(TArray<float>& OutValues, const FIntPoint& Start, const FIntPoint& Size, float Frequency, int32 Seed) const
+FFloatRange UFastNoise2GeneratorBase::GenUniformGrid2D(
+	TArray<float>& OutValues, const FIntPoint& Start, const FIntPoint& Size, float Frequency, int32 Seed) const
 {
 	check(GeneratorInst.get());
 	OutValues.SetNum(Size.X * Size.Y);
-	const FastNoise::OutputMinMax MinMax = GeneratorInst->GenUniformGrid2D(OutValues.GetData(), Start.X, Start.Y, Size.X, Size.Y, Frequency, Seed);
+	const FastNoise::OutputMinMax MinMax =
+		GeneratorInst->GenUniformGrid2D(OutValues.GetData(), Start.X, Start.Y, Size.X, Size.Y, Frequency, Seed);
 	return FFloatRange(MinMax.min, MinMax.max);
 }
 
-FFloatRange UFastNoise2GeneratorBase::GenUniformGrid3D(TArray<float>& OutValues, const FIntVector& Start, const FIntVector& Size, float Frequency, int32 Seed) const
+FFloatRange UFastNoise2GeneratorBase::GenUniformGrid3D(
+	TArray<float>& OutValues, const FIntVector& Start, const FIntVector& Size, float Frequency, int32 Seed) const
 {
 	check(GeneratorInst.get());
 	OutValues.SetNum(Size.X * Size.Y * Size.Z);
-	const FastNoise::OutputMinMax MinMax = GeneratorInst->GenUniformGrid3D(OutValues.GetData(), Start.X, Start.Y, Start.Z, Size.X, Size.Y, Size.Z, Frequency, Seed);
+	const FastNoise::OutputMinMax MinMax =
+		GeneratorInst->GenUniformGrid3D(OutValues.GetData(), Start.X, Start.Y, Start.Z, Size.X, Size.Y, Size.Z, Frequency, Seed);
 	return FFloatRange(MinMax.min, MinMax.max);
 }
 
-FFloatRange UFastNoise2GeneratorBase::GenUniformGrid4D(TArray<float>& OutValues, const FVector4& Start, const FVector4& Size, float Frequency, int32 Seed) const
+FFloatRange UFastNoise2GeneratorBase::GenUniformGrid4D(
+	TArray<float>& OutValues, const FVector4& Start, const FVector4& Size, float Frequency, int32 Seed) const
 {
 	check(GeneratorInst.get());
 	OutValues.SetNum(Size.X * Size.Y * Size.Z * Size.W);
-	const FastNoise::OutputMinMax MinMax = GeneratorInst->GenUniformGrid4D(OutValues.GetData(), Start.X, Start.Y, Start.Z, Start.W, Size.X, Size.Y, Size.Z, Size.W, Frequency, Seed);
+	const FastNoise::OutputMinMax MinMax = GeneratorInst->GenUniformGrid4D(
+		OutValues.GetData(), Start.X, Start.Y, Start.Z, Start.W, Size.X, Size.Y, Size.Z, Size.W, Frequency, Seed);
 	return FFloatRange(MinMax.min, MinMax.max);
 }
 
-FFloatRange UFastNoise2GeneratorBase::GenTileable2D(TArray<float>& OutValues, const FIntPoint& Size, float Frequency, int32 Seed) const
+FFloatRange UFastNoise2GeneratorBase::GenTileable2D(
+	TArray<float>& OutValues, const FIntPoint& Size, float Frequency, int32 Seed) const
 {
 	check(GeneratorInst.get());
 	OutValues.SetNum(Size.X * Size.Y);
@@ -44,7 +52,8 @@ FFloatRange UFastNoise2GeneratorBase::GenTileable2D(TArray<float>& OutValues, co
 	return FFloatRange(MinMax.min, MinMax.max);
 }
 
-FFloatRange UFastNoise2GeneratorBase::GenPositionArray2D(TArray<float>& OutValues, const TArray<FVector2D>& PosArray, const FVector2D& Offset, int32 Seed) const
+FFloatRange UFastNoise2GeneratorBase::GenPositionArray2D(
+	TArray<float>& OutValues, const TArray<FVector2D>& PosArray, const FVector2D& Offset, int32 Seed) const
 {
 	check(GeneratorInst.get());
 	OutValues.SetNum(PosArray.Num());
@@ -59,11 +68,13 @@ FFloatRange UFastNoise2GeneratorBase::GenPositionArray2D(TArray<float>& OutValue
 		YPositions.Add(Pos.Y);
 	}
 
-	const FastNoise::OutputMinMax MinMax = GeneratorInst->GenPositionArray2D(OutValues.GetData(), PosArray.Num(), XPositions.GetData(), YPositions.GetData(), Offset.X, Offset.Y, Seed);
+	const FastNoise::OutputMinMax MinMax = GeneratorInst->GenPositionArray2D(
+		OutValues.GetData(), PosArray.Num(), XPositions.GetData(), YPositions.GetData(), Offset.X, Offset.Y, Seed);
 	return FFloatRange(MinMax.min, MinMax.max);
 }
 
-FFloatRange UFastNoise2GeneratorBase::GenPositionArray3D(TArray<float>& OutValues, const TArray<FVector>& PosArray, const FVector& Offset, int32 Seed) const
+FFloatRange UFastNoise2GeneratorBase::GenPositionArray3D(
+	TArray<float>& OutValues, const TArray<FVector>& PosArray, const FVector& Offset, int32 Seed) const
 {
 	check(GeneratorInst.get());
 	OutValues.SetNum(PosArray.Num());
@@ -81,11 +92,13 @@ FFloatRange UFastNoise2GeneratorBase::GenPositionArray3D(TArray<float>& OutValue
 		ZPositions.Add(Pos.Z);
 	}
 
-	const FastNoise::OutputMinMax MinMax = GeneratorInst->GenPositionArray3D(OutValues.GetData(), PosArray.Num(), XPositions.GetData(), YPositions.GetData(), ZPositions.GetData(), Offset.X, Offset.Y, Offset.Z, Seed);
+	const FastNoise::OutputMinMax MinMax = GeneratorInst->GenPositionArray3D(OutValues.GetData(), PosArray.Num(),
+		XPositions.GetData(), YPositions.GetData(), ZPositions.GetData(), Offset.X, Offset.Y, Offset.Z, Seed);
 	return FFloatRange(MinMax.min, MinMax.max);
 }
 
-FFloatRange UFastNoise2GeneratorBase::GenPositionArray4D(TArray<float>& OutValues, const TArray<FVector4>& PosArray, const FVector4& Offset, int32 Seed) const
+FFloatRange UFastNoise2GeneratorBase::GenPositionArray4D(
+	TArray<float>& OutValues, const TArray<FVector4>& PosArray, const FVector4& Offset, int32 Seed) const
 {
 	check(GeneratorInst.get());
 	OutValues.SetNum(PosArray.Num());
@@ -106,7 +119,9 @@ FFloatRange UFastNoise2GeneratorBase::GenPositionArray4D(TArray<float>& OutValue
 		WPositions.Add(Pos.W);
 	}
 
-	const FastNoise::OutputMinMax MinMax = GeneratorInst->GenPositionArray4D(OutValues.GetData(), PosArray.Num(), XPositions.GetData(), YPositions.GetData(), ZPositions.GetData(), WPositions.GetData(), Offset.X, Offset.Y, Offset.Z, Offset.W, Seed);
+	const FastNoise::OutputMinMax MinMax =
+		GeneratorInst->GenPositionArray4D(OutValues.GetData(), PosArray.Num(), XPositions.GetData(), YPositions.GetData(),
+			ZPositions.GetData(), WPositions.GetData(), Offset.X, Offset.Y, Offset.Z, Offset.W, Seed);
 	return FFloatRange(MinMax.min, MinMax.max);
 }
 
@@ -269,7 +284,8 @@ void UFastNoise2DistanceToPointGenerator::SetDistanceFunction(EFastNoise2Distanc
 {
 	check(DistanceToPointGeneratorInst.get());
 	DistanceFunction = InDistanceFunction;
-	DistanceToPointGeneratorInst->SetDistanceFunction(FFastNoise2Helpers::ConvertUnrealToFastNoiseDistanceFunction(InDistanceFunction));
+	DistanceToPointGeneratorInst->SetDistanceFunction(
+		FFastNoise2Helpers::ConvertUnrealToFastNoiseDistanceFunction(InDistanceFunction));
 }
 
 void UFastNoise2DistanceToPointGenerator::SetScale(FVector4 InScale)
@@ -386,7 +402,8 @@ void UFastNoise2CellularDistanceGenerator::SetReturnType(EFastNoise2CellularDist
 {
 	check(CellularDistanceGeneratorInst.get());
 	ReturnType = InReturnType;
-	CellularDistanceGeneratorInst->SetReturnType(FFastNoise2Helpers::ConvertUnrealToFastNoiseCellularDistanceReturnType(InReturnType));
+	CellularDistanceGeneratorInst->SetReturnType(
+		FFastNoise2Helpers::ConvertUnrealToFastNoiseCellularDistanceReturnType(InReturnType));
 }
 
 FastNoise::SmartNode<FastNoise::Generator> UFastNoise2CellularDistanceGenerator::InitGenerator()
@@ -645,7 +662,8 @@ void UFastNoise2FractalDomainWarpGeneratorBase::SetOctaveCount(int32 InOctaveCou
 	FractalDomainWarpGeneratorInst->SetOctaveCount(InOctaveCount);
 }
 
-void UFastNoise2FractalDomainWarpGeneratorBase::InitFractalDomainWarpBase(FastNoise::SmartNode<FastNoise::Fractal<FastNoise::DomainWarp>> InFractalDomainWarpGeneratorInst)
+void UFastNoise2FractalDomainWarpGeneratorBase::InitFractalDomainWarpBase(
+	FastNoise::SmartNode<FastNoise::Fractal<FastNoise::DomainWarp>> InFractalDomainWarpGeneratorInst)
 {
 	FractalDomainWarpGeneratorInst = InFractalDomainWarpGeneratorInst;
 	SetGainValue(Gain);
@@ -699,11 +717,11 @@ void UFastNoise2OperatorSourceLHSGeneratorBase::SetRHSValue(float InValue)
 	OperatorSourceLHSGeneratorInst->SetRHS(InValue);
 }
 
-void UFastNoise2OperatorSourceLHSGeneratorBase::InitOperatorSourceLHSGenerator(FastNoise::SmartNode<FastNoise::OperatorSourceLHS> InOperatorSourceLHSGeneratorInst)
+void UFastNoise2OperatorSourceLHSGeneratorBase::InitOperatorSourceLHSGenerator(
+	FastNoise::SmartNode<FastNoise::OperatorSourceLHS> InOperatorSourceLHSGeneratorInst)
 {
 	OperatorSourceLHSGeneratorInst = InOperatorSourceLHSGeneratorInst;
 	SetRHSValue(RHSValue);
-
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -740,7 +758,8 @@ void UFastNoise2OperatorHybridLHSGeneratorBase::SetRHSValue(float InValue)
 	OperatorHybridLHSGeneratorInst->SetRHS(InValue);
 }
 
-void UFastNoise2OperatorHybridLHSGeneratorBase::InitOperatorHybridLHSGenerator(FastNoise::SmartNode<FastNoise::OperatorHybridLHS> InOperatorHybridLHSGeneratorInst)
+void UFastNoise2OperatorHybridLHSGeneratorBase::InitOperatorHybridLHSGenerator(
+	FastNoise::SmartNode<FastNoise::OperatorHybridLHS> InOperatorHybridLHSGeneratorInst)
 {
 	OperatorHybridLHSGeneratorInst = InOperatorHybridLHSGeneratorInst;
 	SetRHSValue(LHSValue);
@@ -999,7 +1018,8 @@ void UFastNoise2DomainOffsetGenerator::SetSource(UFastNoise2GeneratorBase* InSou
 	}
 }
 
-void UFastNoise2DomainOffsetGenerator::SetOffsetSources(UFastNoise2GeneratorBase* InSourceX, UFastNoise2GeneratorBase* InSourceY, UFastNoise2GeneratorBase* InSourceZ, UFastNoise2GeneratorBase* InSourceW)
+void UFastNoise2DomainOffsetGenerator::SetOffsetSources(UFastNoise2GeneratorBase* InSourceX, UFastNoise2GeneratorBase* InSourceY,
+	UFastNoise2GeneratorBase* InSourceZ, UFastNoise2GeneratorBase* InSourceW)
 {
 	if (InSourceX != nullptr)
 	{

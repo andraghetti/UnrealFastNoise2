@@ -1,4 +1,5 @@
 #include "FastNoise2/FastNoise2BlueprintLibrary.h"
+
 #include "FastNoise2/FastNoise2Generators.h"
 
 UFastNoise2EncodedNodeTreeGenerator* UFastNoise2BlueprintLibrary::MakeEncodedNodeTreeGenerator(FString EncodedNodeTree)
@@ -41,7 +42,8 @@ UFastNoise2PositionOutputGenerator* UFastNoise2BlueprintLibrary::MakePositionOut
 	return Gen;
 }
 
-UFastNoise2DistanceToPointGenerator* UFastNoise2BlueprintLibrary::MakeDistanceToPointGenerator(UFastNoise2GeneratorBase* Source, EFastNoise2DistanceFunction DistanceFunction, FVector4 Scale)
+UFastNoise2DistanceToPointGenerator* UFastNoise2BlueprintLibrary::MakeDistanceToPointGenerator(
+	UFastNoise2GeneratorBase* Source, EFastNoise2DistanceFunction DistanceFunction, FVector4 Scale)
 {
 	UFastNoise2DistanceToPointGenerator* Gen = NewObject<UFastNoise2DistanceToPointGenerator>();
 	Gen->SetSource(Source);
@@ -70,7 +72,9 @@ UFastNoise2OpenSimplex2Generator* UFastNoise2BlueprintLibrary::MakeOpenSimplex2G
 	return NewObject<UFastNoise2OpenSimplex2Generator>();
 }
 
-UFastNoise2CellularValueGenerator* UFastNoise2BlueprintLibrary::MakeCellularValueGenerator(UFastNoise2GeneratorBase* JitterModifierSource, float JitterModifierValue, EFastNoise2DistanceFunction DistanceFunction, int32 ValueIndex)
+UFastNoise2CellularValueGenerator* UFastNoise2BlueprintLibrary::MakeCellularValueGenerator(
+	UFastNoise2GeneratorBase* JitterModifierSource, float JitterModifierValue, EFastNoise2DistanceFunction DistanceFunction,
+	int32 ValueIndex)
 {
 	UFastNoise2CellularValueGenerator* Gen = NewObject<UFastNoise2CellularValueGenerator>();
 	if (JitterModifierSource != nullptr)
@@ -86,7 +90,9 @@ UFastNoise2CellularValueGenerator* UFastNoise2BlueprintLibrary::MakeCellularValu
 	return Gen;
 }
 
-UFastNoise2CellularDistanceGenerator* UFastNoise2BlueprintLibrary::MakeCellularDistanceGenerator(UFastNoise2GeneratorBase* JitterModifierSource, float JitterModifierValue, EFastNoise2DistanceFunction DistanceFunction, int32 DistanceIndex0, int32 DistanceIndex1, EFastNoise2CellularDistanceReturnType ReturnType)
+UFastNoise2CellularDistanceGenerator* UFastNoise2BlueprintLibrary::MakeCellularDistanceGenerator(
+	UFastNoise2GeneratorBase* JitterModifierSource, float JitterModifierValue, EFastNoise2DistanceFunction DistanceFunction,
+	int32 DistanceIndex0, int32 DistanceIndex1, EFastNoise2CellularDistanceReturnType ReturnType)
 {
 	UFastNoise2CellularDistanceGenerator* Gen = NewObject<UFastNoise2CellularDistanceGenerator>();
 	if (JitterModifierSource != nullptr)
@@ -104,7 +110,9 @@ UFastNoise2CellularDistanceGenerator* UFastNoise2BlueprintLibrary::MakeCellularD
 	return Gen;
 }
 
-UFastNoise2CellularLookupGenerator* UFastNoise2BlueprintLibrary::MakeCellularLookupGenerator(UFastNoise2GeneratorBase* JitterModifierSource, float JitterModifierValue, EFastNoise2DistanceFunction DistanceFunction, UFastNoise2GeneratorBase* LookupSource, float LookupFrequency)
+UFastNoise2CellularLookupGenerator* UFastNoise2BlueprintLibrary::MakeCellularLookupGenerator(
+	UFastNoise2GeneratorBase* JitterModifierSource, float JitterModifierValue, EFastNoise2DistanceFunction DistanceFunction,
+	UFastNoise2GeneratorBase* LookupSource, float LookupFrequency)
 {
 	UFastNoise2CellularLookupGenerator* Gen = NewObject<UFastNoise2CellularLookupGenerator>();
 	if (JitterModifierSource != nullptr)
@@ -121,7 +129,10 @@ UFastNoise2CellularLookupGenerator* UFastNoise2BlueprintLibrary::MakeCellularLoo
 	return Gen;
 }
 
-UFastNoise2FractalFBmGenerator* UFastNoise2BlueprintLibrary::MakeFractalFBmGenerator(UFastNoise2GeneratorBase* Source, UFastNoise2GeneratorBase* GainSource /*= nullptr*/, float Gain /*= 0.5f*/, UFastNoise2GeneratorBase* WeightedStrengthSource /*= nullptr*/, float WeightedStrength /*= 0.f*/, float Lacunarity /*= 2.0f*/, int32 Octaves /*= 3 */)
+UFastNoise2FractalFBmGenerator* UFastNoise2BlueprintLibrary::MakeFractalFBmGenerator(UFastNoise2GeneratorBase* Source,
+	UFastNoise2GeneratorBase* GainSource /*= nullptr*/, float Gain /*= 0.5f*/,
+	UFastNoise2GeneratorBase* WeightedStrengthSource /*= nullptr*/, float WeightedStrength /*= 0.f*/, float Lacunarity /*= 2.0f*/,
+	int32 Octaves /*= 3 */)
 {
 	UFastNoise2FractalFBmGenerator* Gen = NewObject<UFastNoise2FractalFBmGenerator>();
 	Gen->SetSource(Source);
@@ -146,7 +157,10 @@ UFastNoise2FractalFBmGenerator* UFastNoise2BlueprintLibrary::MakeFractalFBmGener
 	return Gen;
 }
 
-UFastNoise2FractalRidgedGenerator* UFastNoise2BlueprintLibrary::MakeFractalRidgedGenerator(UFastNoise2GeneratorBase* Source, UFastNoise2GeneratorBase* GainSource /*= nullptr*/, float Gain /*= 0.5f*/, UFastNoise2GeneratorBase* WeightedStrengthSource /*= nullptr*/, float WeightedStrength /*= 0.f*/, float Lacunarity /*= 2.0f*/, int32 Octaves /*= 3*/)
+UFastNoise2FractalRidgedGenerator* UFastNoise2BlueprintLibrary::MakeFractalRidgedGenerator(UFastNoise2GeneratorBase* Source,
+	UFastNoise2GeneratorBase* GainSource /*= nullptr*/, float Gain /*= 0.5f*/,
+	UFastNoise2GeneratorBase* WeightedStrengthSource /*= nullptr*/, float WeightedStrength /*= 0.f*/, float Lacunarity /*= 2.0f*/,
+	int32 Octaves /*= 3*/)
 {
 	UFastNoise2FractalRidgedGenerator* Gen = NewObject<UFastNoise2FractalRidgedGenerator>();
 	Gen->SetSource(Source);
@@ -171,7 +185,11 @@ UFastNoise2FractalRidgedGenerator* UFastNoise2BlueprintLibrary::MakeFractalRidge
 	return Gen;
 }
 
-UFastNoise2FractalPingPongGenerator* UFastNoise2BlueprintLibrary::MakeFractalPingPongGenerator(UFastNoise2GeneratorBase* Source, UFastNoise2GeneratorBase* PingPongStrengthSource /*= nullptr*/, float PingPongStrength /*= 0.0f*/, UFastNoise2GeneratorBase* GainSource /*= nullptr*/, float Gain /*= 0.5f*/, UFastNoise2GeneratorBase* WeightedStrengthSource /*= nullptr*/, float WeightedStrength /*= 0.f*/, float Lacunarity /*= 2.0f*/, int32 Octaves /*= 3*/)
+UFastNoise2FractalPingPongGenerator* UFastNoise2BlueprintLibrary::MakeFractalPingPongGenerator(UFastNoise2GeneratorBase* Source,
+	UFastNoise2GeneratorBase* PingPongStrengthSource /*= nullptr*/, float PingPongStrength /*= 0.0f*/,
+	UFastNoise2GeneratorBase* GainSource /*= nullptr*/, float Gain /*= 0.5f*/,
+	UFastNoise2GeneratorBase* WeightedStrengthSource /*= nullptr*/, float WeightedStrength /*= 0.f*/, float Lacunarity /*= 2.0f*/,
+	int32 Octaves /*= 3*/)
 {
 	UFastNoise2FractalPingPongGenerator* Gen = NewObject<UFastNoise2FractalPingPongGenerator>();
 	Gen->SetSource(Source);
@@ -204,7 +222,9 @@ UFastNoise2FractalPingPongGenerator* UFastNoise2BlueprintLibrary::MakeFractalPin
 	return Gen;
 }
 
-UFastNoise2DomainWarpGradientGenerator* UFastNoise2BlueprintLibrary::MakeDomainWarpGradientGenerator(UFastNoise2GeneratorBase* Source, UFastNoise2GeneratorBase* WarpAmplitudeSource /*= nullptr*/, float WarpAmplitude /*= 1.0f*/, float WarpFrequency /*= 0.5f*/)
+UFastNoise2DomainWarpGradientGenerator* UFastNoise2BlueprintLibrary::MakeDomainWarpGradientGenerator(
+	UFastNoise2GeneratorBase* Source, UFastNoise2GeneratorBase* WarpAmplitudeSource /*= nullptr*/, float WarpAmplitude /*= 1.0f*/,
+	float WarpFrequency /*= 0.5f*/)
 {
 	UFastNoise2DomainWarpGradientGenerator* Gen = NewObject<UFastNoise2DomainWarpGradientGenerator>();
 	Gen->SetSource(Source);
@@ -220,7 +240,10 @@ UFastNoise2DomainWarpGradientGenerator* UFastNoise2BlueprintLibrary::MakeDomainW
 	return Gen;
 }
 
-UFastNoise2DomainWarpFractalProgressiveGenerator* UFastNoise2BlueprintLibrary::MakeDomainWarpFractalProgressiveGenerator(UFastNoise2DomainWarpGeneratorBase* DomainWarpSource, UFastNoise2GeneratorBase* GainSource /*= nullptr*/, float Gain /*= 0.5f*/, UFastNoise2GeneratorBase* WeightedStrengthSource /*= nullptr*/, float WeightedStrength /*= 0.f*/, float Lacunarity /*= 2.0f*/, int32 Octaves /*= 3*/)
+UFastNoise2DomainWarpFractalProgressiveGenerator* UFastNoise2BlueprintLibrary::MakeDomainWarpFractalProgressiveGenerator(
+	UFastNoise2DomainWarpGeneratorBase* DomainWarpSource, UFastNoise2GeneratorBase* GainSource /*= nullptr*/, float Gain /*= 0.5f*/,
+	UFastNoise2GeneratorBase* WeightedStrengthSource /*= nullptr*/, float WeightedStrength /*= 0.f*/, float Lacunarity /*= 2.0f*/,
+	int32 Octaves /*= 3*/)
 {
 	UFastNoise2DomainWarpFractalProgressiveGenerator* Gen = NewObject<UFastNoise2DomainWarpFractalProgressiveGenerator>();
 	Gen->SetDomainWarpSource(DomainWarpSource);
@@ -245,7 +268,10 @@ UFastNoise2DomainWarpFractalProgressiveGenerator* UFastNoise2BlueprintLibrary::M
 	return Gen;
 }
 
-UFastNoise2DomainWarpFractalIndependantGenerator* UFastNoise2BlueprintLibrary::MakeDomainWarpFractalIndependantGenerator(UFastNoise2DomainWarpGeneratorBase* DomainWarpSource, UFastNoise2GeneratorBase* GainSource /*= nullptr*/, float Gain /*= 0.5f*/, UFastNoise2GeneratorBase* WeightedStrengthSource /*= nullptr*/, float WeightedStrength /*= 0.f*/, float Lacunarity /*= 2.0f*/, int32 Octaves /*= 3*/)
+UFastNoise2DomainWarpFractalIndependantGenerator* UFastNoise2BlueprintLibrary::MakeDomainWarpFractalIndependantGenerator(
+	UFastNoise2DomainWarpGeneratorBase* DomainWarpSource, UFastNoise2GeneratorBase* GainSource /*= nullptr*/, float Gain /*= 0.5f*/,
+	UFastNoise2GeneratorBase* WeightedStrengthSource /*= nullptr*/, float WeightedStrength /*= 0.f*/, float Lacunarity /*= 2.0f*/,
+	int32 Octaves /*= 3*/)
 {
 	UFastNoise2DomainWarpFractalIndependantGenerator* Gen = NewObject<UFastNoise2DomainWarpFractalIndependantGenerator>();
 	Gen->SetDomainWarpSource(DomainWarpSource);
@@ -270,7 +296,8 @@ UFastNoise2DomainWarpFractalIndependantGenerator* UFastNoise2BlueprintLibrary::M
 	return Gen;
 }
 
-UFastNoise2AddGenerator* UFastNoise2BlueprintLibrary::AddValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
+UFastNoise2AddGenerator* UFastNoise2BlueprintLibrary::AddValue(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
 {
 	UFastNoise2AddGenerator* Gen = NewObject<UFastNoise2AddGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -278,7 +305,8 @@ UFastNoise2AddGenerator* UFastNoise2BlueprintLibrary::AddValue(UFastNoise2Genera
 	return Gen;
 }
 
-UFastNoise2AddGenerator* UFastNoise2BlueprintLibrary::AddSources(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
+UFastNoise2AddGenerator* UFastNoise2BlueprintLibrary::AddSources(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
 {
 	UFastNoise2AddGenerator* Gen = NewObject<UFastNoise2AddGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -286,7 +314,8 @@ UFastNoise2AddGenerator* UFastNoise2BlueprintLibrary::AddSources(UFastNoise2Gene
 	return Gen;
 }
 
-UFastNoise2SubtractGenerator* UFastNoise2BlueprintLibrary::SubtractValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
+UFastNoise2SubtractGenerator* UFastNoise2BlueprintLibrary::SubtractValue(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
 {
 	UFastNoise2SubtractGenerator* Gen = NewObject<UFastNoise2SubtractGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -294,7 +323,8 @@ UFastNoise2SubtractGenerator* UFastNoise2BlueprintLibrary::SubtractValue(UFastNo
 	return Gen;
 }
 
-UFastNoise2SubtractGenerator* UFastNoise2BlueprintLibrary::SubtractSource(float LHS /*= 0.0f*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
+UFastNoise2SubtractGenerator* UFastNoise2BlueprintLibrary::SubtractSource(
+	float LHS /*= 0.0f*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
 {
 	UFastNoise2SubtractGenerator* Gen = NewObject<UFastNoise2SubtractGenerator>();
 	Gen->SetLHSValue(LHS);
@@ -302,7 +332,8 @@ UFastNoise2SubtractGenerator* UFastNoise2BlueprintLibrary::SubtractSource(float 
 	return Gen;
 }
 
-UFastNoise2SubtractGenerator* UFastNoise2BlueprintLibrary::SubtractSources(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
+UFastNoise2SubtractGenerator* UFastNoise2BlueprintLibrary::SubtractSources(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
 {
 	UFastNoise2SubtractGenerator* Gen = NewObject<UFastNoise2SubtractGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -310,7 +341,8 @@ UFastNoise2SubtractGenerator* UFastNoise2BlueprintLibrary::SubtractSources(UFast
 	return Gen;
 }
 
-UFastNoise2MultiplyGenerator* UFastNoise2BlueprintLibrary::MultiplyValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
+UFastNoise2MultiplyGenerator* UFastNoise2BlueprintLibrary::MultiplyValue(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
 {
 	UFastNoise2MultiplyGenerator* Gen = NewObject<UFastNoise2MultiplyGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -318,7 +350,8 @@ UFastNoise2MultiplyGenerator* UFastNoise2BlueprintLibrary::MultiplyValue(UFastNo
 	return Gen;
 }
 
-UFastNoise2MultiplyGenerator* UFastNoise2BlueprintLibrary::MultiplySources(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
+UFastNoise2MultiplyGenerator* UFastNoise2BlueprintLibrary::MultiplySources(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
 {
 	UFastNoise2MultiplyGenerator* Gen = NewObject<UFastNoise2MultiplyGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -326,7 +359,8 @@ UFastNoise2MultiplyGenerator* UFastNoise2BlueprintLibrary::MultiplySources(UFast
 	return Gen;
 }
 
-UFastNoise2DivideGenerator* UFastNoise2BlueprintLibrary::DivideValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
+UFastNoise2DivideGenerator* UFastNoise2BlueprintLibrary::DivideValue(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
 {
 	UFastNoise2DivideGenerator* Gen = NewObject<UFastNoise2DivideGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -334,7 +368,8 @@ UFastNoise2DivideGenerator* UFastNoise2BlueprintLibrary::DivideValue(UFastNoise2
 	return Gen;
 }
 
-UFastNoise2DivideGenerator* UFastNoise2BlueprintLibrary::DivideSource(float LHS /*= 0.0f*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
+UFastNoise2DivideGenerator* UFastNoise2BlueprintLibrary::DivideSource(
+	float LHS /*= 0.0f*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
 {
 	UFastNoise2DivideGenerator* Gen = NewObject<UFastNoise2DivideGenerator>();
 	Gen->SetLHSValue(LHS);
@@ -342,7 +377,8 @@ UFastNoise2DivideGenerator* UFastNoise2BlueprintLibrary::DivideSource(float LHS 
 	return Gen;
 }
 
-UFastNoise2DivideGenerator* UFastNoise2BlueprintLibrary::DivideSources(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
+UFastNoise2DivideGenerator* UFastNoise2BlueprintLibrary::DivideSources(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
 {
 	UFastNoise2DivideGenerator* Gen = NewObject<UFastNoise2DivideGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -350,7 +386,8 @@ UFastNoise2DivideGenerator* UFastNoise2BlueprintLibrary::DivideSources(UFastNois
 	return Gen;
 }
 
-UFastNoise2MinGenerator* UFastNoise2BlueprintLibrary::MinValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
+UFastNoise2MinGenerator* UFastNoise2BlueprintLibrary::MinValue(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
 {
 	UFastNoise2MinGenerator* Gen = NewObject<UFastNoise2MinGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -358,7 +395,8 @@ UFastNoise2MinGenerator* UFastNoise2BlueprintLibrary::MinValue(UFastNoise2Genera
 	return Gen;
 }
 
-UFastNoise2MinGenerator* UFastNoise2BlueprintLibrary::MinSources(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
+UFastNoise2MinGenerator* UFastNoise2BlueprintLibrary::MinSources(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
 {
 	UFastNoise2MinGenerator* Gen = NewObject<UFastNoise2MinGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -366,7 +404,8 @@ UFastNoise2MinGenerator* UFastNoise2BlueprintLibrary::MinSources(UFastNoise2Gene
 	return Gen;
 }
 
-UFastNoise2MaxGenerator* UFastNoise2BlueprintLibrary::MaxValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
+UFastNoise2MaxGenerator* UFastNoise2BlueprintLibrary::MaxValue(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/)
 {
 	UFastNoise2MaxGenerator* Gen = NewObject<UFastNoise2MaxGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -374,7 +413,8 @@ UFastNoise2MaxGenerator* UFastNoise2BlueprintLibrary::MaxValue(UFastNoise2Genera
 	return Gen;
 }
 
-UFastNoise2MaxGenerator* UFastNoise2BlueprintLibrary::MaxSources(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
+UFastNoise2MaxGenerator* UFastNoise2BlueprintLibrary::MaxSources(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/)
 {
 	UFastNoise2MaxGenerator* Gen = NewObject<UFastNoise2MaxGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -382,7 +422,8 @@ UFastNoise2MaxGenerator* UFastNoise2BlueprintLibrary::MaxSources(UFastNoise2Gene
 	return Gen;
 }
 
-UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinValueSmoothValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/, float Smoothness /*= 0.1f*/)
+UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinValueSmoothValue(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/, float Smoothness /*= 0.1f*/)
 {
 	UFastNoise2MinSmoothGenerator* Gen = NewObject<UFastNoise2MinSmoothGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -391,7 +432,8 @@ UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinValueSmoothValue(
 	return Gen;
 }
 
-UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinSourcesSmoothValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/, float Smoothness /*= 0.1f*/)
+UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinSourcesSmoothValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/,
+	UFastNoise2GeneratorBase* RHSSource /*= nullptr*/, float Smoothness /*= 0.1f*/)
 {
 	UFastNoise2MinSmoothGenerator* Gen = NewObject<UFastNoise2MinSmoothGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -400,7 +442,8 @@ UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinSourcesSmoothValu
 	return Gen;
 }
 
-UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinValueSmoothSource(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/, UFastNoise2GeneratorBase* SmoothnessSource /*= nullptr*/)
+UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinValueSmoothSource(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/,
+	float RHS /*= 0.0f*/, UFastNoise2GeneratorBase* SmoothnessSource /*= nullptr*/)
 {
 	UFastNoise2MinSmoothGenerator* Gen = NewObject<UFastNoise2MinSmoothGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -409,7 +452,9 @@ UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinValueSmoothSource
 	return Gen;
 }
 
-UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinSourcesSmoothSource(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/, UFastNoise2GeneratorBase* SmoothnessSource /*= nullptr*/)
+UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinSourcesSmoothSource(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/,
+	UFastNoise2GeneratorBase* SmoothnessSource /*= nullptr*/)
 {
 	UFastNoise2MinSmoothGenerator* Gen = NewObject<UFastNoise2MinSmoothGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -418,7 +463,8 @@ UFastNoise2MinSmoothGenerator* UFastNoise2BlueprintLibrary::MinSourcesSmoothSour
 	return Gen;
 }
 
-UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxValueSmoothValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/, float Smoothness /*= 0.1f*/)
+UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxValueSmoothValue(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/, float Smoothness /*= 0.1f*/)
 {
 	UFastNoise2MaxSmoothGenerator* Gen = NewObject<UFastNoise2MaxSmoothGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -427,7 +473,8 @@ UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxValueSmoothValue(
 	return Gen;
 }
 
-UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxSourcesSmoothValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/, float Smoothness /*= 0.1f*/)
+UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxSourcesSmoothValue(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/,
+	UFastNoise2GeneratorBase* RHSSource /*= nullptr*/, float Smoothness /*= 0.1f*/)
 {
 	UFastNoise2MaxSmoothGenerator* Gen = NewObject<UFastNoise2MaxSmoothGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -436,7 +483,8 @@ UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxSourcesSmoothValu
 	return Gen;
 }
 
-UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxValueSmoothSource(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, float RHS /*= 0.0f*/, UFastNoise2GeneratorBase* SmoothnessSource /*= nullptr*/)
+UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxValueSmoothSource(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/,
+	float RHS /*= 0.0f*/, UFastNoise2GeneratorBase* SmoothnessSource /*= nullptr*/)
 {
 	UFastNoise2MaxSmoothGenerator* Gen = NewObject<UFastNoise2MaxSmoothGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -445,7 +493,9 @@ UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxValueSmoothSource
 	return Gen;
 }
 
-UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxSourcesSmoothSource(UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/, UFastNoise2GeneratorBase* SmoothnessSource /*= nullptr*/)
+UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxSourcesSmoothSource(
+	UFastNoise2GeneratorBase* LHSSource /*= nullptr*/, UFastNoise2GeneratorBase* RHSSource /*= nullptr*/,
+	UFastNoise2GeneratorBase* SmoothnessSource /*= nullptr*/)
 {
 	UFastNoise2MaxSmoothGenerator* Gen = NewObject<UFastNoise2MaxSmoothGenerator>();
 	Gen->SetLHSSource(LHSSource);
@@ -454,7 +504,8 @@ UFastNoise2MaxSmoothGenerator* UFastNoise2BlueprintLibrary::MaxSourcesSmoothSour
 	return Gen;
 }
 
-UFastNoise2PowFloatGenerator* UFastNoise2BlueprintLibrary::ExponentValueBaseSource(UFastNoise2GeneratorBase* BaseSource /*= nullptr*/, float Exponent /*= 2.0f*/)
+UFastNoise2PowFloatGenerator* UFastNoise2BlueprintLibrary::ExponentValueBaseSource(
+	UFastNoise2GeneratorBase* BaseSource /*= nullptr*/, float Exponent /*= 2.0f*/)
 {
 	UFastNoise2PowFloatGenerator* Gen = NewObject<UFastNoise2PowFloatGenerator>();
 	Gen->SetValueSource(BaseSource);
@@ -462,7 +513,8 @@ UFastNoise2PowFloatGenerator* UFastNoise2BlueprintLibrary::ExponentValueBaseSour
 	return Gen;
 }
 
-UFastNoise2PowFloatGenerator* UFastNoise2BlueprintLibrary::ExponentSourceBaseValue(float Base /*= 2.0f*/, UFastNoise2GeneratorBase* ExponentSource /*= nullptr*/)
+UFastNoise2PowFloatGenerator* UFastNoise2BlueprintLibrary::ExponentSourceBaseValue(
+	float Base /*= 2.0f*/, UFastNoise2GeneratorBase* ExponentSource /*= nullptr*/)
 {
 	UFastNoise2PowFloatGenerator* Gen = NewObject<UFastNoise2PowFloatGenerator>();
 	Gen->SetValue(Base);
@@ -470,7 +522,8 @@ UFastNoise2PowFloatGenerator* UFastNoise2BlueprintLibrary::ExponentSourceBaseVal
 	return Gen;
 }
 
-UFastNoise2PowFloatGenerator* UFastNoise2BlueprintLibrary::ExponentSourceBaseSource(UFastNoise2GeneratorBase* BaseSource /*= nullptr*/, UFastNoise2GeneratorBase* ExponentSource /*= nullptr*/)
+UFastNoise2PowFloatGenerator* UFastNoise2BlueprintLibrary::ExponentSourceBaseSource(
+	UFastNoise2GeneratorBase* BaseSource /*= nullptr*/, UFastNoise2GeneratorBase* ExponentSource /*= nullptr*/)
 {
 	UFastNoise2PowFloatGenerator* Gen = NewObject<UFastNoise2PowFloatGenerator>();
 	Gen->SetValueSource(BaseSource);
@@ -478,7 +531,8 @@ UFastNoise2PowFloatGenerator* UFastNoise2BlueprintLibrary::ExponentSourceBaseSou
 	return Gen;
 }
 
-UFastNoise2PowIntGenerator* UFastNoise2BlueprintLibrary::ExponentInt(UFastNoise2GeneratorBase* BaseSource /*= nullptr*/, int32 Exponent /*= 2*/)
+UFastNoise2PowIntGenerator* UFastNoise2BlueprintLibrary::ExponentInt(
+	UFastNoise2GeneratorBase* BaseSource /*= nullptr*/, int32 Exponent /*= 2*/)
 {
 	UFastNoise2PowIntGenerator* Gen = NewObject<UFastNoise2PowIntGenerator>();
 	Gen->SetValueSource(BaseSource);
@@ -486,7 +540,8 @@ UFastNoise2PowIntGenerator* UFastNoise2BlueprintLibrary::ExponentInt(UFastNoise2
 	return Gen;
 }
 
-UFastNoise2FadeGenerator* UFastNoise2BlueprintLibrary::FadeByValue(UFastNoise2GeneratorBase* SourceA /*= nullptr*/, UFastNoise2GeneratorBase* SourceB /*= nullptr*/, float Fade /*= 0.5f*/)
+UFastNoise2FadeGenerator* UFastNoise2BlueprintLibrary::FadeByValue(
+	UFastNoise2GeneratorBase* SourceA /*= nullptr*/, UFastNoise2GeneratorBase* SourceB /*= nullptr*/, float Fade /*= 0.5f*/)
 {
 	UFastNoise2FadeGenerator* Gen = NewObject<UFastNoise2FadeGenerator>();
 	Gen->SetASource(SourceA);
@@ -495,7 +550,8 @@ UFastNoise2FadeGenerator* UFastNoise2BlueprintLibrary::FadeByValue(UFastNoise2Ge
 	return Gen;
 }
 
-UFastNoise2FadeGenerator* UFastNoise2BlueprintLibrary::FadeBySource(UFastNoise2GeneratorBase* SourceA /*= nullptr*/, UFastNoise2GeneratorBase* SourceB /*= nullptr*/, UFastNoise2GeneratorBase* FadeSource /*= nullptr*/)
+UFastNoise2FadeGenerator* UFastNoise2BlueprintLibrary::FadeBySource(UFastNoise2GeneratorBase* SourceA /*= nullptr*/,
+	UFastNoise2GeneratorBase* SourceB /*= nullptr*/, UFastNoise2GeneratorBase* FadeSource /*= nullptr*/)
 {
 	UFastNoise2FadeGenerator* Gen = NewObject<UFastNoise2FadeGenerator>();
 	Gen->SetASource(SourceA);
@@ -504,7 +560,8 @@ UFastNoise2FadeGenerator* UFastNoise2BlueprintLibrary::FadeBySource(UFastNoise2G
 	return Gen;
 }
 
-UFastNoise2DomainScaleGenerator* UFastNoise2BlueprintLibrary::DomainScale(UFastNoise2GeneratorBase* Source /*= nullptr*/, float Scale /*= 1.0f*/)
+UFastNoise2DomainScaleGenerator* UFastNoise2BlueprintLibrary::DomainScale(
+	UFastNoise2GeneratorBase* Source /*= nullptr*/, float Scale /*= 1.0f*/)
 {
 	UFastNoise2DomainScaleGenerator* Gen = NewObject<UFastNoise2DomainScaleGenerator>();
 	Gen->SetSource(Source);
@@ -512,7 +569,8 @@ UFastNoise2DomainScaleGenerator* UFastNoise2BlueprintLibrary::DomainScale(UFastN
 	return Gen;
 }
 
-UFastNoise2DomainOffsetGenerator* UFastNoise2BlueprintLibrary::DomainOffsetByValues(UFastNoise2GeneratorBase* Source /*= nullptr*/, FVector4 Offsets)
+UFastNoise2DomainOffsetGenerator* UFastNoise2BlueprintLibrary::DomainOffsetByValues(
+	UFastNoise2GeneratorBase* Source /*= nullptr*/, FVector4 Offsets)
 {
 	UFastNoise2DomainOffsetGenerator* Gen = NewObject<UFastNoise2DomainOffsetGenerator>();
 	Gen->SetSource(Source);
@@ -520,7 +578,9 @@ UFastNoise2DomainOffsetGenerator* UFastNoise2BlueprintLibrary::DomainOffsetByVal
 	return Gen;
 }
 
-UFastNoise2DomainOffsetGenerator* UFastNoise2BlueprintLibrary::DomainOffsetBySources(UFastNoise2GeneratorBase* Source /*= nullptr*/, UFastNoise2GeneratorBase* OffsetSourceX, UFastNoise2GeneratorBase* OffsetSourceY, UFastNoise2GeneratorBase* OffsetSourceZ, UFastNoise2GeneratorBase* OffsetSourceW)
+UFastNoise2DomainOffsetGenerator* UFastNoise2BlueprintLibrary::DomainOffsetBySources(UFastNoise2GeneratorBase* Source /*= nullptr*/,
+	UFastNoise2GeneratorBase* OffsetSourceX, UFastNoise2GeneratorBase* OffsetSourceY, UFastNoise2GeneratorBase* OffsetSourceZ,
+	UFastNoise2GeneratorBase* OffsetSourceW)
 {
 	UFastNoise2DomainOffsetGenerator* Gen = NewObject<UFastNoise2DomainOffsetGenerator>();
 	Gen->SetSource(Source);
@@ -528,7 +588,8 @@ UFastNoise2DomainOffsetGenerator* UFastNoise2BlueprintLibrary::DomainOffsetBySou
 	return Gen;
 }
 
-UFastNoise2DomainRotateGenerator* UFastNoise2BlueprintLibrary::DomainRotate(UFastNoise2GeneratorBase* Source /*= nullptr*/, FRotator Rotation)
+UFastNoise2DomainRotateGenerator* UFastNoise2BlueprintLibrary::DomainRotate(
+	UFastNoise2GeneratorBase* Source /*= nullptr*/, FRotator Rotation)
 {
 	UFastNoise2DomainRotateGenerator* Gen = NewObject<UFastNoise2DomainRotateGenerator>();
 	Gen->SetSource(Source);
@@ -536,7 +597,8 @@ UFastNoise2DomainRotateGenerator* UFastNoise2BlueprintLibrary::DomainRotate(UFas
 	return Gen;
 }
 
-UFastNoise2DomainAxisScaleGenerator* UFastNoise2BlueprintLibrary::DomainAxisScale(UFastNoise2GeneratorBase* Source /*= nullptr*/, FVector4 Scale /*= FVector4(1.f, 1.f, 1.f, 1.f)*/)
+UFastNoise2DomainAxisScaleGenerator* UFastNoise2BlueprintLibrary::DomainAxisScale(
+	UFastNoise2GeneratorBase* Source /*= nullptr*/, FVector4 Scale /*= FVector4(1.f, 1.f, 1.f, 1.f)*/)
 {
 	UFastNoise2DomainAxisScaleGenerator* Gen = NewObject<UFastNoise2DomainAxisScaleGenerator>();
 	Gen->SetSource(Source);
@@ -544,7 +606,8 @@ UFastNoise2DomainAxisScaleGenerator* UFastNoise2BlueprintLibrary::DomainAxisScal
 	return Gen;
 }
 
-UFastNoise2SeedOffsetGenerator* UFastNoise2BlueprintLibrary::SeedOffset(UFastNoise2GeneratorBase* Source /*= nullptr*/, int32 Offset /*= 1*/)
+UFastNoise2SeedOffsetGenerator* UFastNoise2BlueprintLibrary::SeedOffset(
+	UFastNoise2GeneratorBase* Source /*= nullptr*/, int32 Offset /*= 1*/)
 {
 	UFastNoise2SeedOffsetGenerator* Gen = NewObject<UFastNoise2SeedOffsetGenerator>();
 	Gen->SetSource(Source);
@@ -552,7 +615,8 @@ UFastNoise2SeedOffsetGenerator* UFastNoise2BlueprintLibrary::SeedOffset(UFastNoi
 	return Gen;
 }
 
-UFastNoise2RemapGenerator* UFastNoise2BlueprintLibrary::Remap(UFastNoise2GeneratorBase* Source /*= nullptr*/, FVector2D FromRange /*= FVector2D(-1.f, 1.f)*/, FVector2D ToRange /*= FVector2D(0.f, 1.f)*/)
+UFastNoise2RemapGenerator* UFastNoise2BlueprintLibrary::Remap(UFastNoise2GeneratorBase* Source /*= nullptr*/,
+	FVector2D FromRange /*= FVector2D(-1.f, 1.f)*/, FVector2D ToRange /*= FVector2D(0.f, 1.f)*/)
 {
 	UFastNoise2RemapGenerator* Gen = NewObject<UFastNoise2RemapGenerator>();
 	Gen->SetSource(Source);
@@ -563,7 +627,8 @@ UFastNoise2RemapGenerator* UFastNoise2BlueprintLibrary::Remap(UFastNoise2Generat
 	return Gen;
 }
 
-UFastNoise2ConvertRGBA8Generator* UFastNoise2BlueprintLibrary::ConvertRGBA8(UFastNoise2GeneratorBase* Source /*= nullptr*/, FVector2D Range /*= FVector2D(-1.f, 1.f)*/)
+UFastNoise2ConvertRGBA8Generator* UFastNoise2BlueprintLibrary::ConvertRGBA8(
+	UFastNoise2GeneratorBase* Source /*= nullptr*/, FVector2D Range /*= FVector2D(-1.f, 1.f)*/)
 {
 	UFastNoise2ConvertRGBA8Generator* Gen = NewObject<UFastNoise2ConvertRGBA8Generator>();
 	Gen->SetSource(Source);
@@ -572,7 +637,8 @@ UFastNoise2ConvertRGBA8Generator* UFastNoise2BlueprintLibrary::ConvertRGBA8(UFas
 	return Gen;
 }
 
-UFastNoise2TerraceGenerator* UFastNoise2BlueprintLibrary::Terrace(UFastNoise2GeneratorBase* Source /*= nullptr*/, float Multiplier /*= 1.0f*/, float Smoothness /*= 0.f*/)
+UFastNoise2TerraceGenerator* UFastNoise2BlueprintLibrary::Terrace(
+	UFastNoise2GeneratorBase* Source /*= nullptr*/, float Multiplier /*= 1.0f*/, float Smoothness /*= 0.f*/)
 {
 	UFastNoise2TerraceGenerator* Gen = NewObject<UFastNoise2TerraceGenerator>();
 	Gen->SetSource(Source);
@@ -581,7 +647,8 @@ UFastNoise2TerraceGenerator* UFastNoise2BlueprintLibrary::Terrace(UFastNoise2Gen
 	return Gen;
 }
 
-UFastNoise2AddDimensionGenerator* UFastNoise2BlueprintLibrary::AddDimensionWithPositionValue(UFastNoise2GeneratorBase* Source /*= nullptr*/, float DimensionPosition/*= 0.f*/)
+UFastNoise2AddDimensionGenerator* UFastNoise2BlueprintLibrary::AddDimensionWithPositionValue(
+	UFastNoise2GeneratorBase* Source /*= nullptr*/, float DimensionPosition /*= 0.f*/)
 {
 	UFastNoise2AddDimensionGenerator* Gen = NewObject<UFastNoise2AddDimensionGenerator>();
 	Gen->SetSource(Source);
@@ -589,7 +656,8 @@ UFastNoise2AddDimensionGenerator* UFastNoise2BlueprintLibrary::AddDimensionWithP
 	return Gen;
 }
 
-UFastNoise2AddDimensionGenerator* UFastNoise2BlueprintLibrary::AddDimensionWithPositionSource(UFastNoise2GeneratorBase* Source /*= nullptr*/, UFastNoise2GeneratorBase* DimensionPositionSource /*= nullptr*/)
+UFastNoise2AddDimensionGenerator* UFastNoise2BlueprintLibrary::AddDimensionWithPositionSource(
+	UFastNoise2GeneratorBase* Source /*= nullptr*/, UFastNoise2GeneratorBase* DimensionPositionSource /*= nullptr*/)
 {
 	UFastNoise2AddDimensionGenerator* Gen = NewObject<UFastNoise2AddDimensionGenerator>();
 	Gen->SetSource(Source);
@@ -597,7 +665,8 @@ UFastNoise2AddDimensionGenerator* UFastNoise2BlueprintLibrary::AddDimensionWithP
 	return Gen;
 }
 
-UFastNoise2RemoveDimensionGenerator* UFastNoise2BlueprintLibrary::RemoveDimension(UFastNoise2GeneratorBase* Source /*= nullptr*/, EFastNoise2Dimension DimensionToRemove /*= EFastNoise2Dimension::Y*/)
+UFastNoise2RemoveDimensionGenerator* UFastNoise2BlueprintLibrary::RemoveDimension(
+	UFastNoise2GeneratorBase* Source /*= nullptr*/, EFastNoise2Dimension DimensionToRemove /*= EFastNoise2Dimension::Y*/)
 {
 	UFastNoise2RemoveDimensionGenerator* Gen = NewObject<UFastNoise2RemoveDimensionGenerator>();
 	Gen->SetSource(Source);

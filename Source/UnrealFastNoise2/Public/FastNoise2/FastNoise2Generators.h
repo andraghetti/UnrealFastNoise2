@@ -2,17 +2,18 @@
 
 #include "CoreMinimal.h"
 #include "FastNoise/Generators/BasicGenerators.h"
-#include "FastNoise/Generators/Value.h"
-#include "FastNoise/Generators/Perlin.h"
-#include "FastNoise/Generators/Simplex.h"
+#include "FastNoise/Generators/Blends.h"
 #include "FastNoise/Generators/Cellular.h"
-#include "FastNoise/Generators/Fractal.h"
 #include "FastNoise/Generators/DomainWarp.h"
 #include "FastNoise/Generators/DomainWarpFractal.h"
+#include "FastNoise/Generators/Fractal.h"
 #include "FastNoise/Generators/Modifiers.h"
-#include "FastNoise/Generators/Blends.h"
+#include "FastNoise/Generators/Perlin.h"
+#include "FastNoise/Generators/Simplex.h"
+#include "FastNoise/Generators/Value.h"
 #include "FastNoise/SmartNode.h"
 #include "FastNoise2Types.h"
+
 #include "FastNoise2Generators.generated.h"
 
 UCLASS(Abstract, BlueprintType)
@@ -24,26 +25,32 @@ public:
 	virtual void PostInitProperties() override;
 
 	UFUNCTION(BlueprintCallable, Category = "Fast Noise 2")
-	FFloatRange GenUniformGrid2D(TArray<float>& OutValues, const FIntPoint& Start, const FIntPoint& Size, float Frequency = 0.01f, int32 Seed = 1337) const;
+	FFloatRange GenUniformGrid2D(
+		TArray<float>& OutValues, const FIntPoint& Start, const FIntPoint& Size, float Frequency = 0.01f, int32 Seed = 1337) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Fast Noise 2")
-	FFloatRange GenUniformGrid3D(TArray<float>& OutValues, const FIntVector& Start, const FIntVector& Size, float Frequency = 0.01f, int32 Seed = 1337) const;
+	FFloatRange GenUniformGrid3D(TArray<float>& OutValues, const FIntVector& Start, const FIntVector& Size, float Frequency = 0.01f,
+		int32 Seed = 1337) const;
 
 	// FIntVector4 doesn't support BP, so use FVector4
 	UFUNCTION(BlueprintCallable, Category = "Fast Noise 2")
-	FFloatRange GenUniformGrid4D(TArray<float>& OutValues, const FVector4& Start, const FVector4& Size, float Frequency = 0.01f, int32 Seed = 1337) const;
+	FFloatRange GenUniformGrid4D(
+		TArray<float>& OutValues, const FVector4& Start, const FVector4& Size, float Frequency = 0.01f, int32 Seed = 1337) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Fast Noise 2")
 	FFloatRange GenTileable2D(TArray<float>& OutValues, const FIntPoint& Size, float Frequency = 0.01f, int32 Seed = 1337) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Fast Noise 2")
-	FFloatRange GenPositionArray2D(TArray<float>& OutValues, const TArray<FVector2D>& PosArray, const FVector2D& Offset, int32 Seed = 1337) const;
+	FFloatRange GenPositionArray2D(
+		TArray<float>& OutValues, const TArray<FVector2D>& PosArray, const FVector2D& Offset, int32 Seed = 1337) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Fast Noise 2")
-	FFloatRange GenPositionArray3D(TArray<float>& OutValues, const TArray<FVector>& PosArray, const FVector& Offset, int32 Seed = 1337) const;
+	FFloatRange GenPositionArray3D(
+		TArray<float>& OutValues, const TArray<FVector>& PosArray, const FVector& Offset, int32 Seed = 1337) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Fast Noise 2")
-	FFloatRange GenPositionArray4D(TArray<float>& OutValues, const TArray<FVector4>& PosArray, const FVector4& Offset, int32 Seed = 1337) const;
+	FFloatRange GenPositionArray4D(
+		TArray<float>& OutValues, const TArray<FVector4>& PosArray, const FVector4& Offset, int32 Seed = 1337) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Fast Noise 2")
 	float GenSingle2D(const FVector2D& Location, int32 Seed = 1337) const;
@@ -54,10 +61,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Fast Noise 2")
 	float GenSingle4D(const FVector4& Location, int32 Seed = 1337) const;
 
-	const FastNoise::SmartNode<FastNoise::Generator>& GetGenerator() const { return GeneratorInst; }
+	const FastNoise::SmartNode<FastNoise::Generator>& GetGenerator() const
+	{
+		return GeneratorInst;
+	}
 
 protected:
-	virtual FastNoise::SmartNode<FastNoise::Generator> InitGenerator() { return nullptr; }
+	virtual FastNoise::SmartNode<FastNoise::Generator> InitGenerator()
+	{
+		return nullptr;
+	}
 
 	void ResetGenerator();
 
@@ -289,7 +302,6 @@ public:
 	UFUNCTION(BlueprintSetter, Category = "Fast Noise 2")
 	void SetDistanceFunction(EFastNoise2DistanceFunction InDistanceFunction);
 
-
 protected:
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetJitterModifierValue)
 	float JitterModifierValue = 1.0f;
@@ -333,7 +345,7 @@ public:
 
 	UFUNCTION(BlueprintSetter, Category = "Fast Noise 2")
 	void SetDistanceIndex1(int32 InDistanceIndex1);
-	
+
 	UFUNCTION(BlueprintSetter, Category = "Fast Noise 2")
 	void SetReturnType(EFastNoise2CellularDistanceReturnType InReturnType);
 
@@ -403,7 +415,6 @@ public:
 
 	UFUNCTION(BlueprintSetter, Category = "Fast Noise 2")
 	void SetOctaveCount(int32 InOctaveCount);
-
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetGainValue)
@@ -492,7 +503,10 @@ public:
 	UFUNCTION(BlueprintSetter, Category = "Fast Noise 2")
 	void SetWarpFrequencyValue(float InValue);
 
-	const FastNoise::SmartNode<FastNoise::DomainWarp>& GetDomainWarpGenerator() const { return DomainWarpGeneratorInst; }
+	const FastNoise::SmartNode<FastNoise::DomainWarp>& GetDomainWarpGenerator() const
+	{
+		return DomainWarpGeneratorInst;
+	}
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetWarpAmplitudeValue)
@@ -561,7 +575,8 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetOctaveCount)
 	int32 Octaves = 3;
 
-	void InitFractalDomainWarpBase(FastNoise::SmartNode<FastNoise::Fractal<FastNoise::DomainWarp>> InFractalDomainWarpGeneratorInst);
+	void InitFractalDomainWarpBase(
+		FastNoise::SmartNode<FastNoise::Fractal<FastNoise::DomainWarp>> InFractalDomainWarpGeneratorInst);
 
 	FastNoise::SmartNode<FastNoise::Fractal<FastNoise::DomainWarp>> FractalDomainWarpGeneratorInst = nullptr;
 };
@@ -893,7 +908,8 @@ public:
 	void SetSource(UFastNoise2GeneratorBase* InSource);
 
 	UFUNCTION(BlueprintSetter, Category = "Fast Noise 2")
-	void SetOffsetSources(UFastNoise2GeneratorBase* InSourceX, UFastNoise2GeneratorBase* InSourceY, UFastNoise2GeneratorBase* InSourceZ, UFastNoise2GeneratorBase* InSourceW);
+	void SetOffsetSources(UFastNoise2GeneratorBase* InSourceX, UFastNoise2GeneratorBase* InSourceY,
+		UFastNoise2GeneratorBase* InSourceZ, UFastNoise2GeneratorBase* InSourceW);
 
 	UFUNCTION(BlueprintSetter, Category = "Fast Noise 2")
 	void SetOffsetValues(FVector4 InValue);
@@ -979,13 +995,13 @@ public:
 protected:
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetRemapFromLowerBound)
 	float FromLowerBound = -1.f;
-	
+
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetRemapFromUpperBound)
 	float FromUpperBound = 1.f;
-	
+
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetRemapToLowerBound)
 	float ToLowerBound = 0.f;
-	
+
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetRemapToUpperBound)
 	float ToUpperBound = 1.f;
 
@@ -1014,7 +1030,7 @@ public:
 protected:
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetLowerBound)
 	float LowerBound = -1.f;
-	
+
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetUpperBound)
 	float UpperBound = 1.f;
 
@@ -1043,7 +1059,7 @@ public:
 protected:
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetMultiplier)
 	float Multiplier = 1.f;
-	
+
 	UPROPERTY(EditAnywhere, Category = "Fast Noise 2", BlueprintSetter = SetSmoothness)
 	float Smoothness = 0.f;
 
@@ -1140,4 +1156,3 @@ protected:
 
 	FastNoise::SmartNode<FastNoise::GeneratorCache> GeneratorCacheGeneratorInst = nullptr;
 };
-
