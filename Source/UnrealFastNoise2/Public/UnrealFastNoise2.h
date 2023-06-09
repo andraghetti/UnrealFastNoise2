@@ -7,10 +7,10 @@
 class FUnrealFastNoise2Module : public IModuleInterface
 {
 public:
-	/** IModuleInterface implementation */
-	virtual void StartupModule() override;
-	virtual void ShutdownModule() override;
+    /** IModuleInterface implementation */
+    virtual void StartupModule() override;
+    virtual void ShutdownModule() override;
 
 private:
-	void* FastNoiseHandle;
+    void* FastNoiseHandle;
 };
