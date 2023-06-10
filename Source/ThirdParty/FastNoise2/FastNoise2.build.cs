@@ -12,11 +12,14 @@ public class FastNoise2 : ModuleRules
 
         PublicAdditionalLibraries.Add(LibraryPath);
 
-        // Delay-load the library, so we can load it from the right place first
-        PublicDelayLoadDLLs.Add(LibraryName + RuntimeLibExtension);
+		// Delay-load the library, so we can load it from the right place first
+		PublicDelayLoadDLLs.Add(LibraryName + RuntimeLibExtension);
 
-        // Ensure that the library is staged along with the executable
-        RuntimeDependencies.Add(RuntimePath);
+		// Ensure that the library is staged along with the executable
+		RuntimeDependencies.Add(RuntimePath);
+
+		PublicDefinitions.Add("FASTNOISE_LIBRARY_PATH=\"" + RelativeRuntimePath.Replace("\\", "\\\\") + "\"");
+	}
 
         PublicDefinitions.Add("FASTNOISE_LIBRARY_PATH=\"" + RelativeRuntimePath.Replace("\\", "\\\\") + "\"");
     }
@@ -29,13 +32,21 @@ public class FastNoise2 : ModuleRules
         }
     }
 
-    private string PlatformString
-    {
-        get
-        {
-            return Target.Platform.ToString();
-        }
-    }
+	private string RuntimePath
+	{
+		get
+		{
+			return Path.Combine("$(PluginDir)", RelativeRuntimePath);
+		}
+	}
+
+	private string RelativeRuntimePath
+	{
+		get
+		{
+			return Path.Combine("Binaries", "ThirdParty", "FastNoise2", PlatformString, LibraryName + RuntimeLibExtension);
+		}
+	}
 
     private string RuntimePath
     {
