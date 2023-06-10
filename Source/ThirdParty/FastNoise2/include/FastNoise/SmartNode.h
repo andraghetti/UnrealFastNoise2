@@ -261,10 +261,82 @@ private:
         }
     }
 
-    uint64_t mReferenceId;
-    T* mPtr;
-};
-}    // namespace FastNoise
+        T* get() const noexcept
+        {
+            return mPtr;
+        }
+
+        void reset( T* ptr = nullptr )
+        {
+            *this = SmartNode( ptr );
+        }
+
+        void swap( SmartNode& node ) noexcept
+        {
+            std::swap( mReferenceId, node.mReferenceId );
+            std::swap( mPtr, node.mPtr );
+        }
+
+        long use_count() const noexcept
+        {
+            if( mReferenceId == SmartNodeManager::kInvalidReferenceId )
+            {
+                return 0;
+            }
+
+            return (long)SmartNodeManager::ReferenceCount( mReferenceId );
+        }
+
+        bool unique() const noexcept
+        {
+            return use_count() == 1;
+        }
+
+    private:
+        template<typename U>
+        friend SmartNode<U> New( FastSIMD::eLevel );
+
+        template<typename U>
+        friend struct MetadataT;
+
+        template<typename U>
+        friend class SmartNode;
+
+        explicit SmartNode( T* ptr ) :
+            mReferenceId( ptr ? SmartNodeManager::GetReference( ptr ) : SmartNodeManager::kInvalidReferenceId ),
+            mPtr( ptr )
+        {
+            if( mReferenceId != SmartNodeManager::kInvalidReferenceId )
+            {
+                SmartNodeManager::IncReference( mReferenceId );
+            }
+        }
+
+        void Release()
+        {
+            using U = typename std::remove_const<T>::type;
+
+            if( mReferenceId != SmartNodeManager::kInvalidReferenceId )
+            {
+                SmartNodeManager::DecReference( mReferenceId, const_cast<U*>( mPtr ), []( void* ptr ) { ( (U*)ptr )->~T(); } );
+            }
+
+            mReferenceId = SmartNodeManager::kInvalidReferenceId;
+            mPtr = nullptr;            
+        }
+
+        static void TryInc( uint64_t id )
+        {
+            if( id != SmartNodeManager::kInvalidReferenceId )
+            {
+                SmartNodeManager::IncReference( id );
+            }
+        }
+
+        uint64_t mReferenceId;
+        T* mPtr;
+    };
+} // namespace FastNoise
 
 namespace std
 {
