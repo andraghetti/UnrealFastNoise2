@@ -28,4 +28,4 @@ repos:
       - id: remove-crlf
       - id: forbid-tabs
       - id: remove-tabs
-        args: [--whitespaces-count, '4']
+        args: [--whitespaces-count, "4"]
