@@ -10,16 +10,17 @@
 
 void FUnrealFastNoise2Module::StartupModule()
 {
-	const FString BaseDir = IPluginManager::Get().FindPlugin("UnrealFastNoise2")->GetBaseDir();
-	const FString LibraryPath = FPaths::Combine(*BaseDir, TEXT(FASTNOISE_LIBRARY_PATH));
+    const FString BaseDir = IPluginManager::Get().FindPlugin("UnrealFastNoise2")->GetBaseDir();
+    const FString LibraryPath = FPaths::Combine(*BaseDir, TEXT(FASTNOISE_LIBRARY_PATH));
 
     FastNoiseHandle = !LibraryPath.IsEmpty() ? FPlatformProcess::GetDllHandle(*LibraryPath) : nullptr;
 
-	if (FastNoiseHandle == nullptr)
-	{
-		const FText ErrorFormat = NSLOCTEXT("UnrealFastNoise2Module", "ThirdPartyLibraryError", "Failed to load FastNoise library at path [{0}]");
-		FMessageDialog::Open(EAppMsgType::Ok, FText::Format(ErrorFormat, FText::FromString(LibraryPath)));
-	}
+    if (FastNoiseHandle == nullptr)
+    {
+        const FText ErrorFormat =
+            NSLOCTEXT("UnrealFastNoise2Module", "ThirdPartyLibraryError", "Failed to load FastNoise library at path [{0}]");
+        FMessageDialog::Open(EAppMsgType::Ok, FText::Format(ErrorFormat, FText::FromString(LibraryPath)));
+    }
 }
 
 void FUnrealFastNoise2Module::ShutdownModule()

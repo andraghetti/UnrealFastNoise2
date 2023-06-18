@@ -79,10 +79,12 @@ UFastNoise2CellularValueGenerator* UFastNoise2BlueprintLibrary::MakeCellularValu
 =======
 UFastNoise2OpenSimplex2SGenerator* UFastNoise2BlueprintLibrary::MakeOpenSimplex2SGenerator()
 {
-	return NewObject<UFastNoise2OpenSimplex2SGenerator>();
+    return NewObject<UFastNoise2OpenSimplex2SGenerator>();
 }
 
-UFastNoise2CellularValueGenerator* UFastNoise2BlueprintLibrary::MakeCellularValueGenerator(UFastNoise2GeneratorBase* JitterModifierSource, float JitterModifierValue, EFastNoise2DistanceFunction DistanceFunction, int32 ValueIndex)
+UFastNoise2CellularValueGenerator* UFastNoise2BlueprintLibrary::MakeCellularValueGenerator(
+    UFastNoise2GeneratorBase* JitterModifierSource, float JitterModifierValue, EFastNoise2DistanceFunction DistanceFunction,
+    int32 ValueIndex)
 >>>>>>> ce5b007 (Update to FastNoise2 0.10.0-alpha and fix some blueprint meta tags)
 {
     UFastNoise2CellularValueGenerator* Gen = NewObject<UFastNoise2CellularValueGenerator>();

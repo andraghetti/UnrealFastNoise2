@@ -342,8 +342,8 @@ FastNoise::SmartNode<FastNoise::Generator> UFastNoise2OpenSimplex2Generator::Ini
 
 FastNoise::SmartNode<FastNoise::Generator> UFastNoise2OpenSimplex2SGenerator::InitGenerator()
 {
-	OpenSimplex2SGeneratorInst = FastNoise::New<FastNoise::OpenSimplex2S>();
-	return OpenSimplex2SGeneratorInst;
+    OpenSimplex2SGeneratorInst = FastNoise::New<FastNoise::OpenSimplex2S>();
+    return OpenSimplex2SGeneratorInst;
 }
 
 //////////////////////////////////////////////////////////////////////////
