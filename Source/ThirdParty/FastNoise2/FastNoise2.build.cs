@@ -49,7 +49,7 @@ public class FastNoise2 : ModuleRules
 	{
 		get
 		{
-			return Path.Combine("Binaries", "ThirdParty", "FastNoise2", PlatformString, LibraryName + RuntimeLibExtension);
+			return Path.Combine("Resources", "ThirdParty", "FastNoise2", PlatformString, LibraryName + RuntimeLibExtension);
 		}
 	}
 
