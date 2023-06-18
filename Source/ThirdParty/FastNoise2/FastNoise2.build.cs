@@ -7,18 +7,24 @@ public class FastNoise2 : ModuleRules
 {
 	public FastNoise2(ReadOnlyTargetRules Target) : base(Target)
 	{
-		Type = ModuleType.External;
-		PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "include"));
+		if (Target.Platform.IsInGroup(UnrealPlatformGroup.Microsoft))
+		{	
+			Type = ModuleType.External;
+			PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "include"));
 
-		PublicAdditionalLibraries.Add(LibraryPath);
+			PublicAdditionalLibraries.Add(LibraryPath);
+			// Delay-load the library, so we can load it from the right place first
+			PublicDelayLoadDLLs.Add(LibraryName + RuntimeLibExtension);
+			// Ensure that the library is staged along with the executable
+			RuntimeDependencies.Add(RuntimePath);
 
-		// Delay-load the library, so we can load it from the right place first
-		PublicDelayLoadDLLs.Add(LibraryName + RuntimeLibExtension);
-
-		// Ensure that the library is staged along with the executable
-		RuntimeDependencies.Add(RuntimePath);
-
-		PublicDefinitions.Add("FASTNOISE_LIBRARY_PATH=\"" + RelativeRuntimePath.Replace("\\", "\\\\") + "\"");
+			PublicDefinitions.Add("FASTNOISE_LIBRARY_PATH=\"" + RelativeRuntimePath.Replace("\\", "\\\\") + "\"");
+		} else {
+			CMakeTarget.add(
+				Target, this, "FastNoise", Path.Combine(this.PluginDirectory, "../../Deps/FastNoise2"),
+				"-D FASTNOISE2_NOISETOOL=OFF -D FASTNOISE2_TESTS=OFF -D BUILD_SHARED_LIBS=ON", true
+			);
+		}
 	}
 
 	private string ConfigName
