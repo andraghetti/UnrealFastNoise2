@@ -5,33 +5,159 @@ using UnrealBuildTool;
 
 public class FastNoise2 : ModuleRules
 {
-	public FastNoise2(ReadOnlyTargetRules Target) : base(Target)
-	{
-		Type = ModuleType.External;
-		PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "include"));
+    public FastNoise2(ReadOnlyTargetRules Target) : base(Target)
+    {
+        Type = ModuleType.External;
+        PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "include"));
 
-		string platformString = Target.Platform.ToString();
+        PublicAdditionalLibraries.Add(LibraryPath);
 
-		// Add the import library
-		if (Target.Configuration == UnrealTargetConfiguration.Debug)
-		{
-			PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, platformString, "Debug", "FastNoiseD.lib"));
+        // Delay-load the library, so we can load it from the right place first
+        PublicDelayLoadDLLs.Add(LibraryName + RuntimeLibExtension);
 
-			// Delay-load the DLL, so we can load it from the right place first
-			PublicDelayLoadDLLs.Add("FastNoiseD.dll");
+        // Ensure that the library is staged along with the executable
+        RuntimeDependencies.Add(RuntimePath);
 
-			// Ensure that the DLL is staged along with the executable
-			RuntimeDependencies.Add(Path.Combine("$(PluginDir)", "Binaries", "ThirdParty", "FastNoise2", platformString, "FastNoiseD.dll"));
-		}
-		else
-		{
-			PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, platformString, "Release", "FastNoise.lib"));
+        PublicDefinitions.Add("FASTNOISE_LIBRARY_PATH=\"" + RelativeRuntimePath.Replace("\\", "\\\\") + "\"");
+    }
 
-			// Delay-load the DLL, so we can load it from the right place first
-			PublicDelayLoadDLLs.Add("FastNoise.dll");
+        PublicDefinitions.Add("FASTNOISE_LIBRARY_PATH=\"" + RelativeRuntimePath.Replace("\\", "\\\\") + "\"");
+    }
 
-			// Ensure that the DLL is staged along with the executable
-			RuntimeDependencies.Add(Path.Combine("$(PluginDir)", "Binaries", "ThirdParty", "FastNoise2", platformString, "FastNoise.dll"));
-		}
-	}
+    private string ConfigName
+    {
+        get
+        {
+            return Target.Configuration == UnrealTargetConfiguration.Debug ? "Debug" : "Release";
+        }
+    }
+
+    private string RuntimePath
+    {
+        get
+        {
+            return Path.Combine("$(PluginDir)", RelativeRuntimePath);
+        }
+    }
+
+    private string RelativeRuntimePath
+    {
+        get
+        {
+            return Path.Combine("Binaries", "ThirdParty", "FastNoise2", PlatformString, LibraryName + RuntimeLibExtension);
+        }
+    }
+
+    private string RuntimePath
+    {
+        get
+        {
+            return Path.Combine("$(PluginDir)", RelativeRuntimePath);
+        }
+    }
+
+    private string RelativeRuntimePath
+    {
+        get
+        {
+            return Path.Combine("Binaries", "ThirdParty", "FastNoise2", PlatformString, LibraryName + RuntimeLibExtension);
+        }
+    }
+
+    private string LibraryPath
+    {
+        get
+        {
+            if (Target.Platform.IsInGroup(UnrealPlatformGroup.Microsoft))
+            {
+                return Path.Combine(ModuleDirectory, PlatformString, ConfigName, LibraryName + LibraryExtension);
+            }
+            else
+            {
+                return RuntimePath;
+            }
+        }
+    }
+
+    private string LibraryName
+    {
+        get
+        {
+            if (Target.Configuration == UnrealTargetConfiguration.Debug)
+            {
+                if (Target.Platform == UnrealTargetPlatform.Mac ||
+                    Target.Platform == UnrealTargetPlatform.IOS ||
+                    Target.Platform == UnrealTargetPlatform.Android ||
+                    Target.Platform == UnrealTargetPlatform.Linux ||
+                    Target.Platform == UnrealTargetPlatform.LinuxArm64)
+                {
+                    return "libFastNoiseD";
+                }
+                else if (Target.Platform.IsInGroup(UnrealPlatformGroup.Microsoft))
+                {
+                    return "FastNoiseD";
+                }
+            }
+            else
+            {
+
+                if (Target.Platform == UnrealTargetPlatform.Mac ||
+                    Target.Platform == UnrealTargetPlatform.IOS ||
+                    Target.Platform == UnrealTargetPlatform.Android ||
+                    Target.Platform == UnrealTargetPlatform.Linux ||
+                    Target.Platform == UnrealTargetPlatform.LinuxArm64)
+                {
+                    return "libFastNoise";
+                }
+                else if (Target.Platform.IsInGroup(UnrealPlatformGroup.Microsoft))
+                {
+                    return "FastNoise";
+                }
+            }
+
+            throw new BuildException("Unsupported platform");
+        }
+    }
+
+    private string LibraryExtension
+    {
+        get
+        {
+            if (Target.Platform.IsInGroup(UnrealPlatformGroup.Microsoft))
+            {
+                return ".lib";
+            }
+            else
+            {
+                return RuntimeLibExtension;
+            }
+        }
+    }
+
+    private string RuntimeLibExtension
+    {
+        get
+        {
+            if (Target.Platform == UnrealTargetPlatform.Mac)
+            {
+                return ".dylib";
+            }
+            else if (Target.Platform == UnrealTargetPlatform.IOS)
+            {
+                return ".framework";
+            }
+            else if (Target.Platform == UnrealTargetPlatform.Android ||
+                     Target.Platform == UnrealTargetPlatform.Linux ||
+                     Target.Platform == UnrealTargetPlatform.LinuxArm64)
+            {
+                return ".so";
+            }
+            else if (Target.Platform.IsInGroup(UnrealPlatformGroup.Microsoft))
+            {
+                return ".dll";
+            }
+
+            throw new BuildException("Unsupported platform");
+        }
+    }
 }

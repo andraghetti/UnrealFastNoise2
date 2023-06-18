@@ -3,25 +3,29 @@
 
 namespace FastNoise
 {
-    class Simplex : public virtual Generator
-    {
-    public:
-        FASTSIMD_LEVEL_SUPPORT( FastNoise::SUPPORTED_SIMD_LEVELS );
-        const Metadata& GetMetadata() const override;
-    };
+class Simplex : public virtual Generator
+{
+public:
+    FASTSIMD_LEVEL_SUPPORT(FastNoise::SUPPORTED_SIMD_LEVELS);
+    const Metadata& GetMetadata() const override;
+};
 
 #ifdef FASTNOISE_METADATA
-    template<>
-    struct MetadataT<Simplex> : MetadataT<Generator>
+template <>
+struct MetadataT<Simplex> : MetadataT<Generator>
+{
+    SmartNode<> CreateNode(FastSIMD::eLevel) const override;
+
+    MetadataT()
     {
-        SmartNode<> CreateNode( FastSIMD::eLevel ) const override;
+        groups.push_back("Coherent Noise");
 
         MetadataT()
         {
-            groups.push_back( "Coherent Noise" );
+            groups.push_back("Coherent Noise");
 
-            description = 
-                "Smooth gradient noise from N dimensional simplex grid\n"
+            description =
+                "Smooth gradient noise from an N dimensional simplex grid\n"
                 "Developed by Ken Perlin in 2001";
         }
     };
@@ -30,24 +34,76 @@ namespace FastNoise
     class OpenSimplex2 : public virtual Generator
     {
     public:
-        FASTSIMD_LEVEL_SUPPORT( FastNoise::SUPPORTED_SIMD_LEVELS );
+        FASTSIMD_LEVEL_SUPPORT(FastNoise::SUPPORTED_SIMD_LEVELS);
         const Metadata& GetMetadata() const override;
     };
 
 #ifdef FASTNOISE_METADATA
-    template<>
+    template <>
     struct MetadataT<OpenSimplex2> : MetadataT<Generator>
     {
-        SmartNode<> CreateNode( FastSIMD::eLevel ) const override;
+        SmartNode<> CreateNode(FastSIMD::eLevel) const override;
 
         MetadataT()
         {
-            groups.push_back( "Coherent Noise" );
+            groups.push_back("Coherent Noise");
 
-            description = 
-                "Smooth gradient noise from N dimensional simplex honeycomb grid\n"
-                "Developed by K.jpg in 2014";
-        }
-    };
+            MetadataT()
+            {
+                groups.push_back("Coherent Noise");
+
+                description =
+                    "Smooth gradient noise from an N dimensional simplex grid, alternate implementation\n"
+                    "Developed by K.jpg in 2019";
+            }
+        };
 #endif
-}
+
+        class OpenSimplex2S : public virtual Generator
+        {
+        public:
+            FASTSIMD_LEVEL_SUPPORT(FastNoise::SUPPORTED_SIMD_LEVELS);
+            const Metadata& GetMetadata() const override;
+        };
+
+#ifdef FASTNOISE_METADATA
+        template <>
+        struct MetadataT<OpenSimplex2S> : MetadataT<Generator>
+        {
+            SmartNode<> CreateNode(FastSIMD::eLevel) const override;
+
+            MetadataT()
+            {
+                groups.push_back("Coherent Noise");
+
+                description =
+                    "Smoother gradient noise from an N dimensional simplex grid\n"
+                    "Developed by K.jpg in 2017";
+            }
+        };
+#endif
+
+        class OpenSimplex2S : public virtual Generator
+        {
+        public:
+            FASTSIMD_LEVEL_SUPPORT(FastNoise::SUPPORTED_SIMD_LEVELS);
+            const Metadata& GetMetadata() const override;
+        };
+
+#ifdef FASTNOISE_METADATA
+        template <>
+        struct MetadataT<OpenSimplex2S> : MetadataT<Generator>
+        {
+            SmartNode<> CreateNode(FastSIMD::eLevel) const override;
+
+            MetadataT()
+            {
+                groups.push_back("Coherent Noise");
+
+                description =
+                    "Smoother gradient noise from an N dimensional simplex grid\n"
+                    "Developed by K.jpg in 2017";
+            }
+        };
+#endif
+    }    // namespace FastNoise
