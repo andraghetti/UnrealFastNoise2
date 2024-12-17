@@ -1,0 +1,6 @@
+[submodule "Source/ThirdParty/UE4CMake"]
+	path = Source/ThirdParty/UE4CMake
+	url = git@github.com:caseymcc/UE4CMake.git
+[submodule "Source/ThirdParty/FastNoise2/Source"]
+	path = Source/ThirdParty/FastNoise2/Source
+	url = git@github.com:Auburn/FastNoise2.git

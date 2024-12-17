@@ -21,7 +21,7 @@ public class FastNoise2 : ModuleRules
 			PublicDefinitions.Add("FASTNOISE_LIBRARY_PATH=\"" + RelativeRuntimePath.Replace("\\", "\\\\") + "\"");
 		} else {
 			CMakeTarget.add(
-				Target, this, "FastNoise", Path.Combine(this.PluginDirectory, "../../Deps/FastNoise2"),
+				Target, this, "FastNoise", Path.Combine(this.PluginDirectory, "Source/ThirdParty/FastNoise2/Source"),
 				"-D FASTNOISE2_NOISETOOL=OFF -D FASTNOISE2_TESTS=OFF -D BUILD_SHARED_LIBS=ON", true
 			);
 		}
