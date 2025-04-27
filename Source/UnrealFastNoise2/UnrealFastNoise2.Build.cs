@@ -8,27 +8,33 @@ public class UnrealFastNoise2 : ModuleRules
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PrivateIncludePaths.AddRange(
+		PublicIncludePaths.AddRange(
 			new string[] {
 			}
 		);
-
 
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
 				"Core",
+				"FastNoise2",
 				"Engine",
-				"Projects",
-				"FastNoise2"
+				"Projects"
 			}
 		);
-
 
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"CoreUObject"
+				"CoreUObject",
+				"Slate",
+				"SlateCore"
+			}
+		);
+
+		DynamicallyLoadedModuleNames.AddRange(
+			new string[]
+			{
 			}
 		);
 	}
